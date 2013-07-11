@@ -18,4 +18,10 @@ class AssignTest < Test::Unit::TestCase
                            '{% assign foo = values | split: "," %}.{{ foo[1] }}.',
                            'values' => "foo,bar,baz")
   end
+
+  def test_assigned_utf8_variable
+    assert_template_result('.bar.',
+                           "{% assign foo\u6000 = values %}.{{ foo\u6000[1] }}.",
+                           'values' => %w{foo bar baz})
+  end
 end # AssignTest

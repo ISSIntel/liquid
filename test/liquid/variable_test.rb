@@ -48,14 +48,16 @@ class VariableTest < Test::Unit::TestCase
     var = Variable.new(%! hello | things: "%Y, okay?", 'the other one'!)
     assert_equal 'hello', var.name
     assert_equal [["things",["\"%Y, okay?\"","'the other one'"]]], var.filters
+
+    var = Variable.new("foo | chinese\u6000filter: value\u6000")
+    assert_equal 'foo', var.name
+    assert_equal [["chinese\u6000filter",["value\u6000"]]], var.filters
   end
 
   def test_filter_with_date_parameter
-
     var = Variable.new(%! '2006-06-06' | date: "%m/%d/%Y"!)
     assert_equal "'2006-06-06'", var.name
     assert_equal [["date",["\"%m/%d/%Y\""]]], var.filters
-
   end
 
   def test_filters_without_whitespace

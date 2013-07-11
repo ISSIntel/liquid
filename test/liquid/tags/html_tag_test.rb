@@ -16,7 +16,6 @@ class HtmlTagTest < Test::Unit::TestCase
   end
 
   def test_html_table
-
     assert_template_result("<tr class=\"row1\">\n<td class=\"col1\"> 1 </td><td class=\"col2\"> 2 </td><td class=\"col3\"> 3 </td></tr>\n<tr class=\"row2\"><td class=\"col1\"> 4 </td><td class=\"col2\"> 5 </td><td class=\"col3\"> 6 </td></tr>\n",
                            '{% tablerow n in numbers cols:3%} {{n}} {% endtablerow %}',
                            'numbers' => [1,2,3,4,5,6])
@@ -24,6 +23,10 @@ class HtmlTagTest < Test::Unit::TestCase
     assert_template_result("<tr class=\"row1\">\n</tr>\n",
                            '{% tablerow n in numbers cols:3%} {{n}} {% endtablerow %}',
                            'numbers' => [])
+
+    assert_template_result("<tr class=\"row1\">\n<td class=\"col1\"> 1 </td></tr>\n",
+                         "{% tablerow n\u6000 in numbers\u6000 %} {{n\u6000}} {% endtablerow %}",
+                         "numbers\u6000" => [1])
   end
 
   def test_html_table_with_different_cols

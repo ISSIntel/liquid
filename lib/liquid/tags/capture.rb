@@ -12,7 +12,7 @@ module Liquid
   # in a sidebar or footer.
   #
   class Capture < Block
-    Syntax = /(\w+)/
+    Syntax = /([[:word:]]+)/
 
     def initialize(tag_name, markup, tokens)
       if markup =~ Syntax

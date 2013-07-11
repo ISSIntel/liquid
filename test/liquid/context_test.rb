@@ -74,6 +74,9 @@ class ContextTest < Test::Unit::TestCase
     @context['string'] = 'string'
     assert_equal 'string', @context['string']
 
+    @context["chinese\u6000variable"] = 'chinese'
+    assert_equal 'chinese', @context["chinese\u6000variable"]
+
     @context['num'] = 5
     assert_equal 5, @context['num']
 
